@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.title{
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.card-container{
+    display: flex;
+    gap: 10px;
+    flex-wrap:wrap ;
+}
+
+.card{
+    width: 350px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 10px;
+    gap: 10px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.desc{
+    text-align: justify;
+}
+
+.tag-container{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tags{
+    background-color: rgb(208, 203, 204);
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 30px;
+}
