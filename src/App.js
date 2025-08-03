@@ -7,9 +7,11 @@ import './App.css'
 
 export default function App() {
   const {fetchBlogPosts} = useContext(AppContext);
-  useEffect(()=>{
-    fetchBlogPosts();
-  },[])
+  useEffect(() => {
+  fetchBlogPosts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
   return (
     <div>
       <Header/>
