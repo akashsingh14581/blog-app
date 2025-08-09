@@ -1,22 +1,39 @@
 import { useContext, useEffect } from "react";
-import Blog from "./components/Blog";
-import Header from "./components/Header";
-import Pagination from "./components/Pagination";
+import Home from "./pages/Home"
+import BlogPage from "./pages/BlogPage";
+import TagPage from "./pages/TagPage";
+import CategoryPage from "./pages/CategoryPage"
 import { AppContext } from "./context/AppContext";
-import './App.css'
+import "./App.css";
+import { Routes, Route, useSearchParams, useLocation } from "react-router-dom";
 
 export default function App() {
-  const {fetchBlogPosts} = useContext(AppContext);
+  const { fetchBlogPosts } = useContext(AppContext);
+    const location = useLocation();
+  
   useEffect(() => {
-  fetchBlogPosts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+    const page = searchParams.get("page") ?? 1;
+    if (location.pathname.includes("tags")) {
+      // iska mtlb tag wala page show krna h
+      const tag = location.pathname.split("/").at(-1).replace("-", " ");
+      fetchBlogPosts(Number(page), tag);
+    } else if (location.pathname.includes("category")) {
+      const category = location.pathname.split("/").at(-1).replace("-", " ");
+      fetchBlogPosts(Number(page), null, category);
+    } else {
+      fetchBlogPosts(Number(page));
+    }
+  }, [location.pathname, location.search]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
 
   return (
-    <div>
-      <Header/>
-      <Blog/>
-      <Pagination/>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/blog/:blogId" element={<BlogPage />}></Route>
+      <Route path="/tags/:tag" element={<TagPage />}></Route>
+      <Route path="/category/:category" element={<CategoryPage />}></Route>
+    </Routes>
   );
 }
