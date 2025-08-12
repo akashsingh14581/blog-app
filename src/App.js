@@ -24,7 +24,7 @@ export default function App() {
     } else {
       fetchBlogPosts(Number(page));
     }
-  }, [location.pathname, location.search, fetchBlogPosts, searchParams]); // fix dependencies
+  }, [location.pathname, location.search, searchParams]); // fix dependencies
 
   return (
     <Routes>
